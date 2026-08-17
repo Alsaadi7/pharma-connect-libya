@@ -12,12 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as StudentRouteImport } from './routes/student'
 import { Route as AuthAccountTypeRouteImport } from './routes/auth.account-type'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
 import { Route as AuthOtpRouteImport } from './routes/auth.otp'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
+import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -32,6 +35,11 @@ const LanguageRoute = LanguageRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentRoute = StudentRouteImport.update({
+  id: '/student',
+  path: '/student',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthAccountTypeRoute = AuthAccountTypeRouteImport.update({
@@ -64,17 +72,30 @@ const AuthRegisterRoute = AuthRegisterRouteImport.update({
   path: '/auth/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudentIndexRoute = StudentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCoursesIndexRoute = StudentCoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => StudentRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/student': typeof StudentRouteWithChildren
   '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student/': typeof StudentIndexRoute
+  '/student/courses/': typeof StudentCoursesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,18 +107,23 @@ export interface FileRoutesByTo {
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student': typeof StudentIndexRoute
+  '/student/courses': typeof StudentCoursesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/student': typeof StudentRouteWithChildren
   '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student/': typeof StudentIndexRoute
+  '/student/courses/': typeof StudentCoursesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,12 +131,15 @@ export interface FileRouteTypes {
     | '/'
     | '/language'
     | '/onboarding'
+    | '/student'
     | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student/'
+    | '/student/courses/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,23 +151,29 @@ export interface FileRouteTypes {
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student'
+    | '/student/courses'
   id:
     | '__root__'
     | '/'
     | '/language'
     | '/onboarding'
+    | '/student'
     | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student/'
+    | '/student/courses/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
+  StudentRoute: typeof StudentRouteWithChildren
   AuthAccountTypeRoute: typeof AuthAccountTypeRoute
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -168,6 +203,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student': {
+      id: '/student'
+      path: '/student'
+      fullPath: '/student'
+      preLoaderRoute: typeof StudentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/account-type': {
@@ -212,13 +254,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/student/': {
+      id: '/student/'
+      path: '/'
+      fullPath: '/student/'
+      preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/courses/': {
+      id: '/student/courses/'
+      path: '/courses'
+      fullPath: '/student/courses/'
+      preLoaderRoute: typeof StudentCoursesIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
+
+interface StudentRouteChildren {
+  StudentIndexRoute: typeof StudentIndexRoute
+  StudentCoursesIndexRoute: typeof StudentCoursesIndexRoute
+}
+
+const StudentRouteChildren: StudentRouteChildren = {
+  StudentIndexRoute: StudentIndexRoute,
+  StudentCoursesIndexRoute: StudentCoursesIndexRoute,
+}
+
+const StudentRouteWithChildren =
+  StudentRoute._addFileChildren(StudentRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
+  StudentRoute: StudentRouteWithChildren,
   AuthAccountTypeRoute: AuthAccountTypeRoute,
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
