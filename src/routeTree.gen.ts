@@ -10,33 +10,297 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LanguageRouteImport } from './routes/language'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as StudentRouteImport } from './routes/student'
+import { Route as AuthAccountTypeRouteImport } from './routes/auth.account-type'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
+import { Route as AuthOtpRouteImport } from './routes/auth.otp'
+import { Route as AuthRegisterRouteImport } from './routes/auth.register'
+import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as StudentCasesRouteImport } from './routes/student.cases'
+import { Route as StudentCertificatesRouteImport } from './routes/student.certificates'
+import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
+import { Route as StudentProfileRouteImport } from './routes/student.profile'
+import { Route as StudentTrainingRouteImport } from './routes/student.training'
+import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
+import { Route as StudentCoursesCourseIdRouteImport } from './routes/student.courses.$courseId'
+import { Route as StudentMessagesIndexRouteImport } from './routes/student.messages.index'
+import { Route as StudentMessagesThreadIdRouteImport } from './routes/student.messages.$threadId'
+import { Route as StudentPharmaciesIndexRouteImport } from './routes/student.pharmacies.index'
+import { Route as StudentPharmaciesPharmacyIdRouteImport } from './routes/student.pharmacies.$pharmacyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LanguageRoute = LanguageRouteImport.update({
+  id: '/language',
+  path: '/language',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentRoute = StudentRouteImport.update({
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthAccountTypeRoute = AuthAccountTypeRouteImport.update({
+  id: '/auth/account-type',
+  path: '/auth/account-type',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/auth/forgot',
+  path: '/auth/forgot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthNewPasswordRoute = AuthNewPasswordRouteImport.update({
+  id: '/auth/new-password',
+  path: '/auth/new-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthOtpRoute = AuthOtpRouteImport.update({
+  id: '/auth/otp',
+  path: '/auth/otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentIndexRoute = StudentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCasesRoute = StudentCasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentProfileRoute = StudentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentTrainingRoute = StudentTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCoursesIndexRoute = StudentCoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCoursesCourseIdRoute = StudentCoursesCourseIdRouteImport.update({
+  id: '/courses/$courseId',
+  path: '/courses/$courseId',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentMessagesIndexRoute = StudentMessagesIndexRouteImport.update({
+  id: '/messages/',
+  path: '/messages/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentMessagesThreadIdRoute = StudentMessagesThreadIdRouteImport.update({
+  id: '/messages/$threadId',
+  path: '/messages/$threadId',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentPharmaciesIndexRoute = StudentPharmaciesIndexRouteImport.update({
+  id: '/pharmacies/',
+  path: '/pharmacies/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentPharmaciesPharmacyIdRoute =
+  StudentPharmaciesPharmacyIdRouteImport.update({
+    id: '/pharmacies/$pharmacyId',
+    path: '/pharmacies/$pharmacyId',
+    getParentRoute: () => StudentRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/onboarding': typeof OnboardingRoute
+  '/student': typeof StudentRouteWithChildren
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/student/cases': typeof StudentCasesRoute
+  '/student/certificates': typeof StudentCertificatesRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/training': typeof StudentTrainingRoute
+  '/student/': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
+  '/student/courses/': typeof StudentCoursesIndexRoute
+  '/student/messages/': typeof StudentMessagesIndexRoute
+  '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/onboarding': typeof OnboardingRoute
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/student/cases': typeof StudentCasesRoute
+  '/student/certificates': typeof StudentCertificatesRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/training': typeof StudentTrainingRoute
+  '/student': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
+  '/student/courses': typeof StudentCoursesIndexRoute
+  '/student/messages': typeof StudentMessagesIndexRoute
+  '/student/pharmacies': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/onboarding': typeof OnboardingRoute
+  '/student': typeof StudentRouteWithChildren
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/student/cases': typeof StudentCasesRoute
+  '/student/certificates': typeof StudentCertificatesRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/training': typeof StudentTrainingRoute
+  '/student/': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
+  '/student/courses/': typeof StudentCoursesIndexRoute
+  '/student/messages/': typeof StudentMessagesIndexRoute
+  '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/student'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
+    | '/student/cases'
+    | '/student/certificates'
+    | '/student/notifications'
+    | '/student/profile'
+    | '/student/training'
+    | '/student/'
+    | '/student/courses/$courseId'
+    | '/student/messages/$threadId'
+    | '/student/pharmacies/$pharmacyId'
+    | '/student/courses/'
+    | '/student/messages/'
+    | '/student/pharmacies/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
+    | '/student/cases'
+    | '/student/certificates'
+    | '/student/notifications'
+    | '/student/profile'
+    | '/student/training'
+    | '/student'
+    | '/student/courses/$courseId'
+    | '/student/messages/$threadId'
+    | '/student/pharmacies/$pharmacyId'
+    | '/student/courses'
+    | '/student/messages'
+    | '/student/pharmacies'
+  id:
+    | '__root__'
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/student'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
+    | '/student/cases'
+    | '/student/certificates'
+    | '/student/notifications'
+    | '/student/profile'
+    | '/student/training'
+    | '/student/'
+    | '/student/courses/$courseId'
+    | '/student/messages/$threadId'
+    | '/student/pharmacies/$pharmacyId'
+    | '/student/courses/'
+    | '/student/messages/'
+    | '/student/pharmacies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LanguageRoute: typeof LanguageRoute
+  OnboardingRoute: typeof OnboardingRoute
+  StudentRoute: typeof StudentRouteWithChildren
+  AuthAccountTypeRoute: typeof AuthAccountTypeRoute
+  AuthForgotRoute: typeof AuthForgotRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthNewPasswordRoute: typeof AuthNewPasswordRoute
+  AuthOtpRoute: typeof AuthOtpRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +312,200 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/language': {
+      id: '/language'
+      path: '/language'
+      fullPath: '/language'
+      preLoaderRoute: typeof LanguageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student': {
+      id: '/student'
+      path: '/student'
+      fullPath: '/student'
+      preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/account-type': {
+      id: '/auth/account-type'
+      path: '/auth/account-type'
+      fullPath: '/auth/account-type'
+      preLoaderRoute: typeof AuthAccountTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/auth/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/new-password': {
+      id: '/auth/new-password'
+      path: '/auth/new-password'
+      fullPath: '/auth/new-password'
+      preLoaderRoute: typeof AuthNewPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/otp': {
+      id: '/auth/otp'
+      path: '/auth/otp'
+      fullPath: '/auth/otp'
+      preLoaderRoute: typeof AuthOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/': {
+      id: '/student/'
+      path: '/'
+      fullPath: '/student/'
+      preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/cases': {
+      id: '/student/cases'
+      path: '/cases'
+      fullPath: '/student/cases'
+      preLoaderRoute: typeof StudentCasesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/certificates': {
+      id: '/student/certificates'
+      path: '/certificates'
+      fullPath: '/student/certificates'
+      preLoaderRoute: typeof StudentCertificatesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/notifications': {
+      id: '/student/notifications'
+      path: '/notifications'
+      fullPath: '/student/notifications'
+      preLoaderRoute: typeof StudentNotificationsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/profile': {
+      id: '/student/profile'
+      path: '/profile'
+      fullPath: '/student/profile'
+      preLoaderRoute: typeof StudentProfileRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/training': {
+      id: '/student/training'
+      path: '/training'
+      fullPath: '/student/training'
+      preLoaderRoute: typeof StudentTrainingRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/courses/': {
+      id: '/student/courses/'
+      path: '/courses'
+      fullPath: '/student/courses/'
+      preLoaderRoute: typeof StudentCoursesIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/courses/$courseId': {
+      id: '/student/courses/$courseId'
+      path: '/courses/$courseId'
+      fullPath: '/student/courses/$courseId'
+      preLoaderRoute: typeof StudentCoursesCourseIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/messages/': {
+      id: '/student/messages/'
+      path: '/messages'
+      fullPath: '/student/messages/'
+      preLoaderRoute: typeof StudentMessagesIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/messages/$threadId': {
+      id: '/student/messages/$threadId'
+      path: '/messages/$threadId'
+      fullPath: '/student/messages/$threadId'
+      preLoaderRoute: typeof StudentMessagesThreadIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/pharmacies/': {
+      id: '/student/pharmacies/'
+      path: '/pharmacies'
+      fullPath: '/student/pharmacies/'
+      preLoaderRoute: typeof StudentPharmaciesIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/pharmacies/$pharmacyId': {
+      id: '/student/pharmacies/$pharmacyId'
+      path: '/pharmacies/$pharmacyId'
+      fullPath: '/student/pharmacies/$pharmacyId'
+      preLoaderRoute: typeof StudentPharmaciesPharmacyIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
+interface StudentRouteChildren {
+  StudentCasesRoute: typeof StudentCasesRoute
+  StudentCertificatesRoute: typeof StudentCertificatesRoute
+  StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentProfileRoute: typeof StudentProfileRoute
+  StudentTrainingRoute: typeof StudentTrainingRoute
+  StudentIndexRoute: typeof StudentIndexRoute
+  StudentCoursesCourseIdRoute: typeof StudentCoursesCourseIdRoute
+  StudentMessagesThreadIdRoute: typeof StudentMessagesThreadIdRoute
+  StudentPharmaciesPharmacyIdRoute: typeof StudentPharmaciesPharmacyIdRoute
+  StudentCoursesIndexRoute: typeof StudentCoursesIndexRoute
+  StudentMessagesIndexRoute: typeof StudentMessagesIndexRoute
+  StudentPharmaciesIndexRoute: typeof StudentPharmaciesIndexRoute
+}
+
+const StudentRouteChildren: StudentRouteChildren = {
+  StudentCasesRoute: StudentCasesRoute,
+  StudentCertificatesRoute: StudentCertificatesRoute,
+  StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentProfileRoute: StudentProfileRoute,
+  StudentTrainingRoute: StudentTrainingRoute,
+  StudentIndexRoute: StudentIndexRoute,
+  StudentCoursesCourseIdRoute: StudentCoursesCourseIdRoute,
+  StudentMessagesThreadIdRoute: StudentMessagesThreadIdRoute,
+  StudentPharmaciesPharmacyIdRoute: StudentPharmaciesPharmacyIdRoute,
+  StudentCoursesIndexRoute: StudentCoursesIndexRoute,
+  StudentMessagesIndexRoute: StudentMessagesIndexRoute,
+  StudentPharmaciesIndexRoute: StudentPharmaciesIndexRoute,
+}
+
+const StudentRouteWithChildren =
+  StudentRoute._addFileChildren(StudentRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LanguageRoute: LanguageRoute,
+  OnboardingRoute: OnboardingRoute,
+  StudentRoute: StudentRouteWithChildren,
+  AuthAccountTypeRoute: AuthAccountTypeRoute,
+  AuthForgotRoute: AuthForgotRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthNewPasswordRoute: AuthNewPasswordRoute,
+  AuthOtpRoute: AuthOtpRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
