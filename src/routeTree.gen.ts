@@ -12,6 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AuthAccountTypeRouteImport } from './routes/auth.account-type'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
+import { Route as AuthOtpRouteImport } from './routes/auth.otp'
+import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +34,117 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthAccountTypeRoute = AuthAccountTypeRouteImport.update({
+  id: '/auth/account-type',
+  path: '/auth/account-type',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/auth/forgot',
+  path: '/auth/forgot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthNewPasswordRoute = AuthNewPasswordRouteImport.update({
+  id: '/auth/new-password',
+  path: '/auth/new-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthOtpRoute = AuthOtpRouteImport.update({
+  id: '/auth/otp',
+  path: '/auth/otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/auth/account-type': typeof AuthAccountTypeRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/new-password': typeof AuthNewPasswordRoute
+  '/auth/otp': typeof AuthOtpRoute
+  '/auth/register': typeof AuthRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/language' | '/onboarding'
+  fullPaths:
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/language' | '/onboarding'
-  id: '__root__' | '/' | '/language' | '/onboarding'
+  to:
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
+  id:
+    | '__root__'
+    | '/'
+    | '/language'
+    | '/onboarding'
+    | '/auth/account-type'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/new-password'
+    | '/auth/otp'
+    | '/auth/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
+  AuthAccountTypeRoute: typeof AuthAccountTypeRoute
+  AuthForgotRoute: typeof AuthForgotRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthNewPasswordRoute: typeof AuthNewPasswordRoute
+  AuthOtpRoute: typeof AuthOtpRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +170,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/account-type': {
+      id: '/auth/account-type'
+      path: '/auth/account-type'
+      fullPath: '/auth/account-type'
+      preLoaderRoute: typeof AuthAccountTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/auth/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/new-password': {
+      id: '/auth/new-password'
+      path: '/auth/new-password'
+      fullPath: '/auth/new-password'
+      preLoaderRoute: typeof AuthNewPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/otp': {
+      id: '/auth/otp'
+      path: '/auth/otp'
+      fullPath: '/auth/otp'
+      preLoaderRoute: typeof AuthOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +219,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
+  AuthAccountTypeRoute: AuthAccountTypeRoute,
+  AuthForgotRoute: AuthForgotRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthNewPasswordRoute: AuthNewPasswordRoute,
+  AuthOtpRoute: AuthOtpRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
