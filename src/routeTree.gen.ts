@@ -10,9 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CompanyRouteImport } from './routes/company'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PharmacyRouteImport } from './routes/pharmacy'
 import { Route as StudentRouteImport } from './routes/student'
+import { Route as SupervisorRouteImport } from './routes/supervisor'
 import { Route as AuthAccountTypeRouteImport } from './routes/auth.account-type'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
@@ -37,6 +41,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyRoute = CompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LanguageRoute = LanguageRouteImport.update({
   id: '/language',
   path: '/language',
@@ -47,9 +61,19 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PharmacyRoute = PharmacyRouteImport.update({
+  id: '/pharmacy',
+  path: '/pharmacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupervisorRoute = SupervisorRouteImport.update({
+  id: '/supervisor',
+  path: '/supervisor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthAccountTypeRoute = AuthAccountTypeRouteImport.update({
@@ -146,9 +170,13 @@ const StudentPharmaciesPharmacyIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/company': typeof CompanyRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/pharmacy': typeof PharmacyRoute
   '/student': typeof StudentRouteWithChildren
+  '/supervisor': typeof SupervisorRoute
   '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -170,8 +198,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/company': typeof CompanyRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/pharmacy': typeof PharmacyRoute
+  '/supervisor': typeof SupervisorRoute
   '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -194,9 +226,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/company': typeof CompanyRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/pharmacy': typeof PharmacyRoute
   '/student': typeof StudentRouteWithChildren
+  '/supervisor': typeof SupervisorRoute
   '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -220,9 +256,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/company'
     | '/language'
     | '/onboarding'
+    | '/pharmacy'
     | '/student'
+    | '/supervisor'
     | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
@@ -244,8 +284,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
+    | '/company'
     | '/language'
     | '/onboarding'
+    | '/pharmacy'
+    | '/supervisor'
     | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
@@ -267,9 +311,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/company'
     | '/language'
     | '/onboarding'
+    | '/pharmacy'
     | '/student'
+    | '/supervisor'
     | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
@@ -292,9 +340,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  CompanyRoute: typeof CompanyRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
+  PharmacyRoute: typeof PharmacyRoute
   StudentRoute: typeof StudentRouteWithChildren
+  SupervisorRoute: typeof SupervisorRoute
   AuthAccountTypeRoute: typeof AuthAccountTypeRoute
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -312,6 +364,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/language': {
       id: '/language'
       path: '/language'
@@ -326,11 +392,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pharmacy': {
+      id: '/pharmacy'
+      path: '/pharmacy'
+      fullPath: '/pharmacy'
+      preLoaderRoute: typeof PharmacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student': {
       id: '/student'
       path: '/student'
       fullPath: '/student'
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supervisor': {
+      id: '/supervisor'
+      path: '/supervisor'
+      fullPath: '/supervisor'
+      preLoaderRoute: typeof SupervisorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/account-type': {
@@ -497,9 +577,13 @@ const StudentRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  CompanyRoute: CompanyRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
+  PharmacyRoute: PharmacyRoute,
   StudentRoute: StudentRouteWithChildren,
+  SupervisorRoute: SupervisorRoute,
   AuthAccountTypeRoute: AuthAccountTypeRoute,
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
