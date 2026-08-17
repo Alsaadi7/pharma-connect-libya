@@ -37,7 +37,7 @@ export function AppBar({
     <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-card/90 px-4 py-3 backdrop-blur-md">
       {back ? (
         <Link
-          to={back}
+          to={back as never}
           className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-foreground"
           aria-label="رجوع"
         >
@@ -58,7 +58,7 @@ export function SectionTitle({ title, href }: { title: string; href?: string }) 
     <div className="mb-3 flex items-baseline justify-between px-1">
       <h2 className="text-[15px] font-bold">{title}</h2>
       {href ? (
-        <Link to={href} className="text-xs font-semibold text-primary">
+        <Link to={href as never} className="text-xs font-semibold text-primary">
           عرض الكل
         </Link>
       ) : null}
@@ -216,8 +216,8 @@ export function Avatar({ initials, size = "md" }: { initials: string; size?: "sm
 export function CourseCard({ course, wide }: { course: Course; wide?: boolean }) {
   return (
     <Link
-      to="/student/courses/$courseId"
-      params={{ courseId: course.id }}
+      to={"/student/courses/$courseId" as never}
+      params={{ courseId: course.id } as never}
       className={cn("surface-card block overflow-hidden", wide ? "w-full" : "w-[248px] shrink-0")}
     >
       <div className="relative h-28 gradient-primary">
@@ -251,8 +251,8 @@ export function CourseCard({ course, wide }: { course: Course; wide?: boolean })
 export function PharmacyCard({ pharmacy }: { pharmacy: Pharmacy }) {
   return (
     <Link
-      to="/student/pharmacies/$pharmacyId"
-      params={{ pharmacyId: pharmacy.id }}
+      to={"/student/pharmacies/$pharmacyId" as never}
+      params={{ pharmacyId: pharmacy.id } as never}
       className="surface-card flex items-center gap-3 p-3.5"
     >
       <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-secondary-soft text-lg font-bold text-secondary">
@@ -304,7 +304,7 @@ export function StudentRow({
     </>
   );
   return to ? (
-    <Link to={to} className="surface-card flex items-center gap-3 p-3.5">
+    <Link to={to as never} className="surface-card flex items-center gap-3 p-3.5">
       {inner}
     </Link>
   ) : (
@@ -338,7 +338,7 @@ export function ListTile({
     </>
   );
   return to ? (
-    <Link to={to} className="flex items-center gap-3 bg-card px-4 py-3">
+    <Link to={to as never} className="flex items-center gap-3 bg-card px-4 py-3">
       {inner}
     </Link>
   ) : (
@@ -371,7 +371,7 @@ export function ActionButton({
     styles[variant],
   );
   return to ? (
-    <Link to={to} className={cls}>
+    <Link to={to as never} className={cls}>
       {children}
     </Link>
   ) : (
