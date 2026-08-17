@@ -20,7 +20,11 @@ import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
 import { Route as AuthOtpRouteImport } from './routes/auth.otp'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as StudentTrainingRouteImport } from './routes/student.training'
 import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
+import { Route as StudentCoursesCourseIdRouteImport } from './routes/student.courses.$courseId'
+import { Route as StudentPharmaciesIndexRouteImport } from './routes/student.pharmacies.index'
+import { Route as StudentPharmaciesPharmacyIdRouteImport } from './routes/student.pharmacies.$pharmacyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -77,11 +81,32 @@ const StudentIndexRoute = StudentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentTrainingRoute = StudentTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentCoursesIndexRoute = StudentCoursesIndexRouteImport.update({
   id: '/courses/',
   path: '/courses/',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentCoursesCourseIdRoute = StudentCoursesCourseIdRouteImport.update({
+  id: '/courses/$courseId',
+  path: '/courses/$courseId',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentPharmaciesIndexRoute = StudentPharmaciesIndexRouteImport.update({
+  id: '/pharmacies/',
+  path: '/pharmacies/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentPharmaciesPharmacyIdRoute =
+  StudentPharmaciesPharmacyIdRouteImport.update({
+    id: '/pharmacies/$pharmacyId',
+    path: '/pharmacies/$pharmacyId',
+    getParentRoute: () => StudentRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,8 +119,12 @@ export interface FileRoutesByFullPath {
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses/': typeof StudentCoursesIndexRoute
+  '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,8 +136,12 @@ export interface FileRoutesByTo {
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student/training': typeof StudentTrainingRoute
   '/student': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses': typeof StudentCoursesIndexRoute
+  '/student/pharmacies': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,8 +155,12 @@ export interface FileRoutesById {
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
+  '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
+  '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses/': typeof StudentCoursesIndexRoute
+  '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -138,8 +175,12 @@ export interface FileRouteTypes {
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student/training'
     | '/student/'
+    | '/student/courses/$courseId'
+    | '/student/pharmacies/$pharmacyId'
     | '/student/courses/'
+    | '/student/pharmacies/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -151,8 +192,12 @@ export interface FileRouteTypes {
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student/training'
     | '/student'
+    | '/student/courses/$courseId'
+    | '/student/pharmacies/$pharmacyId'
     | '/student/courses'
+    | '/student/pharmacies'
   id:
     | '__root__'
     | '/'
@@ -165,8 +210,12 @@ export interface FileRouteTypes {
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
+    | '/student/training'
     | '/student/'
+    | '/student/courses/$courseId'
+    | '/student/pharmacies/$pharmacyId'
     | '/student/courses/'
+    | '/student/pharmacies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -261,6 +310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentIndexRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/training': {
+      id: '/student/training'
+      path: '/training'
+      fullPath: '/student/training'
+      preLoaderRoute: typeof StudentTrainingRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/courses/': {
       id: '/student/courses/'
       path: '/courses'
@@ -268,17 +324,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCoursesIndexRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/courses/$courseId': {
+      id: '/student/courses/$courseId'
+      path: '/courses/$courseId'
+      fullPath: '/student/courses/$courseId'
+      preLoaderRoute: typeof StudentCoursesCourseIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/pharmacies/': {
+      id: '/student/pharmacies/'
+      path: '/pharmacies'
+      fullPath: '/student/pharmacies/'
+      preLoaderRoute: typeof StudentPharmaciesIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/pharmacies/$pharmacyId': {
+      id: '/student/pharmacies/$pharmacyId'
+      path: '/pharmacies/$pharmacyId'
+      fullPath: '/student/pharmacies/$pharmacyId'
+      preLoaderRoute: typeof StudentPharmaciesPharmacyIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
 interface StudentRouteChildren {
+  StudentTrainingRoute: typeof StudentTrainingRoute
   StudentIndexRoute: typeof StudentIndexRoute
+  StudentCoursesCourseIdRoute: typeof StudentCoursesCourseIdRoute
+  StudentPharmaciesPharmacyIdRoute: typeof StudentPharmaciesPharmacyIdRoute
   StudentCoursesIndexRoute: typeof StudentCoursesIndexRoute
+  StudentPharmaciesIndexRoute: typeof StudentPharmaciesIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
+  StudentTrainingRoute: StudentTrainingRoute,
   StudentIndexRoute: StudentIndexRoute,
+  StudentCoursesCourseIdRoute: StudentCoursesCourseIdRoute,
+  StudentPharmaciesPharmacyIdRoute: StudentPharmaciesPharmacyIdRoute,
   StudentCoursesIndexRoute: StudentCoursesIndexRoute,
+  StudentPharmaciesIndexRoute: StudentPharmaciesIndexRoute,
 }
 
 const StudentRouteWithChildren =
