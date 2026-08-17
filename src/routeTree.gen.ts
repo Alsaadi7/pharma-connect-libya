@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CompanyRouteImport } from './routes/company'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as FlowRouteImport } from './routes/flow'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PharmacyRouteImport } from './routes/pharmacy'
@@ -49,6 +51,16 @@ const AdminRoute = AdminRouteImport.update({
 const CompanyRoute = CompanyRouteImport.update({
   id: '/company',
   path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlowRoute = FlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LanguageRoute = LanguageRouteImport.update({
@@ -172,6 +184,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/company': typeof CompanyRoute
+  '/design-system': typeof DesignSystemRoute
+  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/pharmacy': typeof PharmacyRoute
@@ -200,6 +214,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/company': typeof CompanyRoute
+  '/design-system': typeof DesignSystemRoute
+  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/pharmacy': typeof PharmacyRoute
@@ -228,6 +244,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/company': typeof CompanyRoute
+  '/design-system': typeof DesignSystemRoute
+  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/pharmacy': typeof PharmacyRoute
@@ -258,6 +276,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/company'
+    | '/design-system'
+    | '/flow'
     | '/language'
     | '/onboarding'
     | '/pharmacy'
@@ -286,6 +306,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/company'
+    | '/design-system'
+    | '/flow'
     | '/language'
     | '/onboarding'
     | '/pharmacy'
@@ -313,6 +335,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/company'
+    | '/design-system'
+    | '/flow'
     | '/language'
     | '/onboarding'
     | '/pharmacy'
@@ -342,6 +366,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   CompanyRoute: typeof CompanyRoute
+  DesignSystemRoute: typeof DesignSystemRoute
+  FlowRoute: typeof FlowRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
   PharmacyRoute: typeof PharmacyRoute
@@ -376,6 +402,20 @@ declare module '@tanstack/react-router' {
       path: '/company'
       fullPath: '/company'
       preLoaderRoute: typeof CompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flow': {
+      id: '/flow'
+      path: '/flow'
+      fullPath: '/flow'
+      preLoaderRoute: typeof FlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/language': {
@@ -579,6 +619,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   CompanyRoute: CompanyRoute,
+  DesignSystemRoute: DesignSystemRoute,
+  FlowRoute: FlowRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
   PharmacyRoute: PharmacyRoute,
