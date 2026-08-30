@@ -1,29 +1,43 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Pill, ArrowLeft, Sparkles, Building2, Stethoscope, Factory, ShieldCheck, GraduationCap } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  Pill,
+  ArrowLeft,
+  Building2,
+  GraduationCap,
+  Stethoscope,
+  HelpCircle,
+  ScanSearch,
+} from "lucide-react";
 import { ActionButton } from "@/components/kit";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PharmaTrain Libya — منصة تدريب وتعليم طلاب الصيدلة" },
+      { title: "PharmaTrain Libya — تدريب وتعليم طلاب الصيدلة" },
       {
         name: "description",
         content:
-          "ابدأ تدريبك العملي في صيدليات ليبيا، تابع ساعاتك وتقييمك، واحصل على دورات وشهادات رقمية معتمدة.",
+          "منصة واحدة تربط طلاب الصيدلة بالصيدليات — تدريب عملي، دورات، حالات سريرية، وأسئلة دوائية تفاعلية.",
       },
       { property: "og:title", content: "PharmaTrain Libya — تدريب طلاب الصيدلة" },
-      { property: "og:description", content: "تدريب عملي، دورات، اختبارات، وشهادات رقمية لطلاب الصيدلة في ليبيا." },
+      {
+        property: "og:description",
+        content: "تدريب عملي في الصيدليات، دورات منظمة، حالات سريرية، وأسئلة دوائية.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Splash,
 });
 
-const entries = [
-  { icon: GraduationCap, label: "طالب صيدلة", to: "/student" },
-  { icon: Building2, label: "صيدلية", to: "/pharmacy" },
-  { icon: Stethoscope, label: "مشرف تدريب", to: "/supervisor" },
-  { icon: Factory, label: "شركة أدوية", to: "/company" },
-  { icon: ShieldCheck, label: "مدير النظام", to: "/admin" },
+const highlights = [
+  { icon: GraduationCap, label: "طلاب الصيدلة", desc: "مسار تعليمي متدرّج" },
+  { icon: Building2, label: "الصيدليات", desc: "تدريب عملي معتمد" },
+  { icon: Stethoscope, label: "حالات سريرية", desc: "حالات واقعية مبسّطة" },
+  { icon: HelpCircle, label: "أسئلة دوائية", desc: "اختبر معرفتك بالأدوية" },
+  { icon: ScanSearch, label: "الدواء بالصورة", desc: "تعرّف على الدواء" },
+  { icon: Pill, label: "بطاقات الأدوية", desc: "معلومات مختصرة وسريعة" },
 ];
 
 function Splash() {
@@ -39,12 +53,11 @@ function Splash() {
             فارما ترين ليبيا
             <span className="latin mt-1 block text-sm font-semibold opacity-80">PharmaTrain Libya</span>
           </h1>
-          <p className="mt-3 max-w-[290px] text-sm leading-relaxed opacity-90">
-            منصة واحدة تربط طلاب الصيدلة بالصيدليات والمشرفين وشركات الأدوية — تدريب عملي، دورات،
-            وشهادات رقمية.
+          <p className="mt-3 max-w-[300px] text-sm leading-relaxed opacity-90">
+            منصة واحدة تربط طلاب الصيدلة بالصيدليات — تدريب عملي، دورات
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-semibold">
-            {["تدريب معتمد", "حضور QR", "شهادات رقمية"].map((t) => (
+            {["دورات منظمة", "حالات سريرية", "اختبار معرفة الأدوية"].map((t) => (
               <span key={t} className="rounded-full bg-primary-foreground/15 px-3 py-1.5 backdrop-blur">
                 {t}
               </span>
@@ -53,7 +66,7 @@ function Splash() {
         </div>
       </div>
 
-      <div className="-mt-8 space-y-4 rounded-t-[28px] bg-background px-5 pb-10 pt-6">
+      <div className="-mt-8 space-y-5 rounded-t-[28px] bg-background px-5 pb-10 pt-6">
         <div className="space-y-2.5">
           <ActionButton to="/onboarding">
             ابدأ الآن <ArrowLeft className="size-4" />
@@ -63,38 +76,21 @@ function Splash() {
           </ActionButton>
         </div>
 
-        <div className="pt-2">
-          <p className="mb-3 flex items-center gap-1.5 px-1 text-xs font-bold text-muted-foreground">
-            <Sparkles className="size-3.5 text-warning" />
-            استعراض سريع لواجهات النظام
-          </p>
-          <div className="grid grid-cols-2 gap-2.5">
-            {entries.map(({ icon: Icon, label, to }) => (
-              <Link
-                key={to}
-                to={to as never}
-                className="surface-card flex items-center gap-2.5 p-3.5 text-xs font-bold"
-              >
-                <span className="flex size-9 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                  <Icon className="size-4.5" />
-                </span>
-                {label}
-              </Link>
-            ))}
-            <Link to="/design-system" className="surface-card flex items-center gap-2.5 p-3.5 text-xs font-bold">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-secondary-soft text-secondary">
-                <Sparkles className="size-4.5" />
+        <div className="grid grid-cols-2 gap-2.5">
+          {highlights.map(({ icon: Icon, label, desc }) => (
+            <div key={label} className="surface-card space-y-1.5 p-3.5">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                <Icon className="size-4.5" />
               </span>
-              نظام التصميم
-            </Link>
-          </div>
-          <Link
-            to="/flow"
-            className="mt-3 block rounded-2xl border border-dashed border-primary/40 bg-primary-soft/60 p-3.5 text-center text-xs font-bold text-primary"
-          >
-            خريطة النموذج التفاعلي ومسارات الانتقال
-          </Link>
+              <p className="text-xs font-bold">{label}</p>
+              <p className="text-[10px] leading-relaxed text-muted-foreground">{desc}</p>
+            </div>
+          ))}
         </div>
+
+        <p className="px-1 text-[10px] leading-relaxed text-muted-foreground">
+          محتوى تعليمي لطلاب الصيدلة منظم وفق تصنيف WHO ATC، وليس أداة لتشخيص المرضى أو وصف الأدوية.
+        </p>
       </div>
     </div>
   );
