@@ -1,23 +1,28 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, GraduationCap, CalendarCheck, MessageCircle, User } from "lucide-react";
+import { Home, GraduationCap, TrendingUp, Bell, User } from "lucide-react";
+import { platformNotifications } from "@/lib/notifications";
+import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/student", label: "الرئيسية", icon: Home, exact: true },
   { to: "/student/courses", label: "الدورات", icon: GraduationCap },
-  { to: "/student/training", label: "التدريب", icon: CalendarCheck },
-  { to: "/student/messages", label: "الرسائل", icon: MessageCircle, badge: 2 },
+  { to: "/student/training", label: "التدريب", icon: TrendingUp },
+  { to: "/student/notifications", label: "الإشعارات", icon: Bell, notif: true },
   { to: "/student/profile", label: "حسابي", icon: User },
 ];
 
 export function BottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { state } = useStore();
+  const unread = platformNotifications.filter((n) => !state.readNotifications.includes(n.id)).length;
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] border-t border-border bg-card/95 px-2 pb-2 pt-1.5 backdrop-blur-md">
       <ul className="flex items-stretch justify-between">
-        {items.map(({ to, label, icon: Icon, badge, exact }) => {
+        {items.map(({ to, label, icon: Icon, notif, exact }) => {
           const active = exact ? pathname === to : pathname.startsWith(to);
+          const badge = notif && unread ? unread : 0;
           return (
             <li key={to} className="flex-1">
               <Link
