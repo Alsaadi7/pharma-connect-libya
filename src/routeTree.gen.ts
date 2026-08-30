@@ -11,15 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
-import { Route as CompanyRouteImport } from './routes/company'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
-import { Route as FlowRouteImport } from './routes/flow'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
-import { Route as PharmacyRouteImport } from './routes/pharmacy'
 import { Route as StudentRouteImport } from './routes/student'
-import { Route as SupervisorRouteImport } from './routes/supervisor'
-import { Route as AuthAccountTypeRouteImport } from './routes/auth.account-type'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
@@ -27,14 +22,11 @@ import { Route as AuthOtpRouteImport } from './routes/auth.otp'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as StudentCasesRouteImport } from './routes/student.cases'
-import { Route as StudentCertificatesRouteImport } from './routes/student.certificates'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
 import { Route as StudentTrainingRouteImport } from './routes/student.training'
 import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
 import { Route as StudentCoursesCourseIdRouteImport } from './routes/student.courses.$courseId'
-import { Route as StudentMessagesIndexRouteImport } from './routes/student.messages.index'
-import { Route as StudentMessagesThreadIdRouteImport } from './routes/student.messages.$threadId'
 import { Route as StudentPharmaciesIndexRouteImport } from './routes/student.pharmacies.index'
 import { Route as StudentPharmaciesPharmacyIdRouteImport } from './routes/student.pharmacies.$pharmacyId'
 
@@ -48,19 +40,9 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompanyRoute = CompanyRouteImport.update({
-  id: '/company',
-  path: '/company',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlowRoute = FlowRouteImport.update({
-  id: '/flow',
-  path: '/flow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LanguageRoute = LanguageRouteImport.update({
@@ -73,24 +55,9 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PharmacyRoute = PharmacyRouteImport.update({
-  id: '/pharmacy',
-  path: '/pharmacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SupervisorRoute = SupervisorRouteImport.update({
-  id: '/supervisor',
-  path: '/supervisor',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthAccountTypeRoute = AuthAccountTypeRouteImport.update({
-  id: '/auth/account-type',
-  path: '/auth/account-type',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthForgotRoute = AuthForgotRouteImport.update({
@@ -128,11 +95,6 @@ const StudentCasesRoute = StudentCasesRouteImport.update({
   path: '/cases',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
-  id: '/certificates',
-  path: '/certificates',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -158,16 +120,6 @@ const StudentCoursesCourseIdRoute = StudentCoursesCourseIdRouteImport.update({
   path: '/courses/$courseId',
   getParentRoute: () => StudentRoute,
 } as any)
-const StudentMessagesIndexRoute = StudentMessagesIndexRouteImport.update({
-  id: '/messages/',
-  path: '/messages/',
-  getParentRoute: () => StudentRoute,
-} as any)
-const StudentMessagesThreadIdRoute = StudentMessagesThreadIdRouteImport.update({
-  id: '/messages/$threadId',
-  path: '/messages/$threadId',
-  getParentRoute: () => StudentRoute,
-} as any)
 const StudentPharmaciesIndexRoute = StudentPharmaciesIndexRouteImport.update({
   id: '/pharmacies/',
   path: '/pharmacies/',
@@ -183,91 +135,67 @@ const StudentPharmaciesPharmacyIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/company': typeof CompanyRoute
   '/design-system': typeof DesignSystemRoute
-  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
-  '/pharmacy': typeof PharmacyRoute
   '/student': typeof StudentRouteWithChildren
-  '/supervisor': typeof SupervisorRoute
-  '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
-  '/student/certificates': typeof StudentCertificatesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
-  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses/': typeof StudentCoursesIndexRoute
-  '/student/messages/': typeof StudentMessagesIndexRoute
   '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/company': typeof CompanyRoute
   '/design-system': typeof DesignSystemRoute
-  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
-  '/pharmacy': typeof PharmacyRoute
-  '/supervisor': typeof SupervisorRoute
-  '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
-  '/student/certificates': typeof StudentCertificatesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
   '/student': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
-  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses': typeof StudentCoursesIndexRoute
-  '/student/messages': typeof StudentMessagesIndexRoute
   '/student/pharmacies': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/company': typeof CompanyRoute
   '/design-system': typeof DesignSystemRoute
-  '/flow': typeof FlowRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
-  '/pharmacy': typeof PharmacyRoute
   '/student': typeof StudentRouteWithChildren
-  '/supervisor': typeof SupervisorRoute
-  '/auth/account-type': typeof AuthAccountTypeRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
-  '/student/certificates': typeof StudentCertificatesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
-  '/student/messages/$threadId': typeof StudentMessagesThreadIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
   '/student/courses/': typeof StudentCoursesIndexRoute
-  '/student/messages/': typeof StudentMessagesIndexRoute
   '/student/pharmacies/': typeof StudentPharmaciesIndexRoute
 }
 export interface FileRouteTypes {
@@ -275,105 +203,76 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/company'
     | '/design-system'
-    | '/flow'
     | '/language'
     | '/onboarding'
-    | '/pharmacy'
     | '/student'
-    | '/supervisor'
-    | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
-    | '/student/certificates'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
     | '/student/'
     | '/student/courses/$courseId'
-    | '/student/messages/$threadId'
     | '/student/pharmacies/$pharmacyId'
     | '/student/courses/'
-    | '/student/messages/'
     | '/student/pharmacies/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
-    | '/company'
     | '/design-system'
-    | '/flow'
     | '/language'
     | '/onboarding'
-    | '/pharmacy'
-    | '/supervisor'
-    | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
-    | '/student/certificates'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
     | '/student'
     | '/student/courses/$courseId'
-    | '/student/messages/$threadId'
     | '/student/pharmacies/$pharmacyId'
     | '/student/courses'
-    | '/student/messages'
     | '/student/pharmacies'
   id:
     | '__root__'
     | '/'
     | '/admin'
-    | '/company'
     | '/design-system'
-    | '/flow'
     | '/language'
     | '/onboarding'
-    | '/pharmacy'
     | '/student'
-    | '/supervisor'
-    | '/auth/account-type'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
-    | '/student/certificates'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
     | '/student/'
     | '/student/courses/$courseId'
-    | '/student/messages/$threadId'
     | '/student/pharmacies/$pharmacyId'
     | '/student/courses/'
-    | '/student/messages/'
     | '/student/pharmacies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
-  CompanyRoute: typeof CompanyRoute
   DesignSystemRoute: typeof DesignSystemRoute
-  FlowRoute: typeof FlowRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
-  PharmacyRoute: typeof PharmacyRoute
   StudentRoute: typeof StudentRouteWithChildren
-  SupervisorRoute: typeof SupervisorRoute
-  AuthAccountTypeRoute: typeof AuthAccountTypeRoute
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthNewPasswordRoute: typeof AuthNewPasswordRoute
@@ -397,25 +296,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/company': {
-      id: '/company'
-      path: '/company'
-      fullPath: '/company'
-      preLoaderRoute: typeof CompanyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/design-system': {
       id: '/design-system'
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flow': {
-      id: '/flow'
-      path: '/flow'
-      fullPath: '/flow'
-      preLoaderRoute: typeof FlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/language': {
@@ -432,32 +317,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pharmacy': {
-      id: '/pharmacy'
-      path: '/pharmacy'
-      fullPath: '/pharmacy'
-      preLoaderRoute: typeof PharmacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/student': {
       id: '/student'
       path: '/student'
       fullPath: '/student'
       preLoaderRoute: typeof StudentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/supervisor': {
-      id: '/supervisor'
-      path: '/supervisor'
-      fullPath: '/supervisor'
-      preLoaderRoute: typeof SupervisorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/account-type': {
-      id: '/auth/account-type'
-      path: '/auth/account-type'
-      fullPath: '/auth/account-type'
-      preLoaderRoute: typeof AuthAccountTypeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/forgot': {
@@ -509,13 +373,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCasesRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/student/certificates': {
-      id: '/student/certificates'
-      path: '/certificates'
-      fullPath: '/student/certificates'
-      preLoaderRoute: typeof StudentCertificatesRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/student/notifications': {
       id: '/student/notifications'
       path: '/notifications'
@@ -551,20 +408,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCoursesCourseIdRouteImport
       parentRoute: typeof StudentRoute
     }
-    '/student/messages/': {
-      id: '/student/messages/'
-      path: '/messages'
-      fullPath: '/student/messages/'
-      preLoaderRoute: typeof StudentMessagesIndexRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/student/messages/$threadId': {
-      id: '/student/messages/$threadId'
-      path: '/messages/$threadId'
-      fullPath: '/student/messages/$threadId'
-      preLoaderRoute: typeof StudentMessagesThreadIdRouteImport
-      parentRoute: typeof StudentRoute
-    }
     '/student/pharmacies/': {
       id: '/student/pharmacies/'
       path: '/pharmacies'
@@ -584,31 +427,25 @@ declare module '@tanstack/react-router' {
 
 interface StudentRouteChildren {
   StudentCasesRoute: typeof StudentCasesRoute
-  StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentTrainingRoute: typeof StudentTrainingRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCoursesCourseIdRoute: typeof StudentCoursesCourseIdRoute
-  StudentMessagesThreadIdRoute: typeof StudentMessagesThreadIdRoute
   StudentPharmaciesPharmacyIdRoute: typeof StudentPharmaciesPharmacyIdRoute
   StudentCoursesIndexRoute: typeof StudentCoursesIndexRoute
-  StudentMessagesIndexRoute: typeof StudentMessagesIndexRoute
   StudentPharmaciesIndexRoute: typeof StudentPharmaciesIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCasesRoute: StudentCasesRoute,
-  StudentCertificatesRoute: StudentCertificatesRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentTrainingRoute: StudentTrainingRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCoursesCourseIdRoute: StudentCoursesCourseIdRoute,
-  StudentMessagesThreadIdRoute: StudentMessagesThreadIdRoute,
   StudentPharmaciesPharmacyIdRoute: StudentPharmaciesPharmacyIdRoute,
   StudentCoursesIndexRoute: StudentCoursesIndexRoute,
-  StudentMessagesIndexRoute: StudentMessagesIndexRoute,
   StudentPharmaciesIndexRoute: StudentPharmaciesIndexRoute,
 }
 
@@ -618,15 +455,10 @@ const StudentRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
-  CompanyRoute: CompanyRoute,
   DesignSystemRoute: DesignSystemRoute,
-  FlowRoute: FlowRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
-  PharmacyRoute: PharmacyRoute,
   StudentRoute: StudentRouteWithChildren,
-  SupervisorRoute: SupervisorRoute,
-  AuthAccountTypeRoute: AuthAccountTypeRoute,
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthNewPasswordRoute: AuthNewPasswordRoute,
