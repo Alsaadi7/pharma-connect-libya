@@ -12,7 +12,7 @@ export type Drug = {
   className: string; // المجموعة الدوائية
   subtitle: string;
   atc: string; // WHO ATC code
-  legal: "OTC" | "Rx";
+  legal: "OTC" | "Rx" | "OTC/Rx";
   route: string;
   pregnancy: string;
   ages: string;
@@ -874,18 +874,16 @@ export function suggestDrugs(query: string, limit = 8): Suggestion[] {
 export function levenshtein(a: string, b: string): number {
   const m = a.length;
   const n = b.length;
-  const dp = Array.from({ length: m + 1 }, (_, i) => [i, ...Array<number>(n).fill(0)]);
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  let prev: number[] = Array.from({ length: n + 1 }, (_, j) => j);
   for (let i = 1; i <= m; i++) {
+    const cur: number[] = [i];
     for (let j = 1; j <= n; j++) {
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
-      );
+      const cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+      cur[j] = Math.min((prev[j] ?? 0) + 1, (cur[j - 1] ?? 0) + 1, (prev[j - 1] ?? 0) + cost);
     }
+    prev = cur;
   }
-  return dp[m][n];
+  return prev[n] ?? 0;
 }
 
 export function fuzzyMatch(input: string, target: string): boolean {
