@@ -77,7 +77,7 @@ function Onboarding() {
 
       <div className="space-y-2.5">
         {last ? (
-          <ActionButton to="/auth/account-type">
+          <ActionButton to="/auth/register">
             إنشاء حساب <ArrowLeft className="size-4" />
           </ActionButton>
         ) : (

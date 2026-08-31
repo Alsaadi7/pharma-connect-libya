@@ -22,8 +22,12 @@ import { Route as AuthOtpRouteImport } from './routes/auth.otp'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as StudentCasesRouteImport } from './routes/student.cases'
+import { Route as StudentDrugImagesRouteImport } from './routes/student.drug-images'
+import { Route as StudentDrugQuestionsRouteImport } from './routes/student.drug-questions'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
+import { Route as StudentPrescriptionsRouteImport } from './routes/student.prescriptions'
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
+import { Route as StudentSavedRouteImport } from './routes/student.saved'
 import { Route as StudentTrainingRouteImport } from './routes/student.training'
 import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
 import { Route as StudentCoursesCourseIdRouteImport } from './routes/student.courses.$courseId'
@@ -95,14 +99,34 @@ const StudentCasesRoute = StudentCasesRouteImport.update({
   path: '/cases',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentDrugImagesRoute = StudentDrugImagesRouteImport.update({
+  id: '/drug-images',
+  path: '/drug-images',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentDrugQuestionsRoute = StudentDrugQuestionsRouteImport.update({
+  id: '/drug-questions',
+  path: '/drug-questions',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentPrescriptionsRoute = StudentPrescriptionsRouteImport.update({
+  id: '/prescriptions',
+  path: '/prescriptions',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentProfileRoute = StudentProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentSavedRoute = StudentSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentTrainingRoute = StudentTrainingRouteImport.update({
@@ -145,8 +169,12 @@ export interface FileRoutesByFullPath {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-images': typeof StudentDrugImagesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
+  '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
@@ -166,8 +194,12 @@ export interface FileRoutesByTo {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-images': typeof StudentDrugImagesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
+  '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
@@ -189,8 +221,12 @@ export interface FileRoutesById {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-images': typeof StudentDrugImagesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
+  '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
@@ -213,8 +249,12 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-images'
+    | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
+    | '/student/saved'
     | '/student/training'
     | '/student/'
     | '/student/courses/$courseId'
@@ -234,8 +274,12 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-images'
+    | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
+    | '/student/saved'
     | '/student/training'
     | '/student'
     | '/student/courses/$courseId'
@@ -256,8 +300,12 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-images'
+    | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
+    | '/student/saved'
     | '/student/training'
     | '/student/'
     | '/student/courses/$courseId'
@@ -373,6 +421,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCasesRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/drug-images': {
+      id: '/student/drug-images'
+      path: '/drug-images'
+      fullPath: '/student/drug-images'
+      preLoaderRoute: typeof StudentDrugImagesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/drug-questions': {
+      id: '/student/drug-questions'
+      path: '/drug-questions'
+      fullPath: '/student/drug-questions'
+      preLoaderRoute: typeof StudentDrugQuestionsRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/notifications': {
       id: '/student/notifications'
       path: '/notifications'
@@ -380,11 +442,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentNotificationsRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/prescriptions': {
+      id: '/student/prescriptions'
+      path: '/prescriptions'
+      fullPath: '/student/prescriptions'
+      preLoaderRoute: typeof StudentPrescriptionsRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/profile': {
       id: '/student/profile'
       path: '/profile'
       fullPath: '/student/profile'
       preLoaderRoute: typeof StudentProfileRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/student/saved': {
+      id: '/student/saved'
+      path: '/saved'
+      fullPath: '/student/saved'
+      preLoaderRoute: typeof StudentSavedRouteImport
       parentRoute: typeof StudentRoute
     }
     '/student/training': {
@@ -427,8 +503,12 @@ declare module '@tanstack/react-router' {
 
 interface StudentRouteChildren {
   StudentCasesRoute: typeof StudentCasesRoute
+  StudentDrugImagesRoute: typeof StudentDrugImagesRoute
+  StudentDrugQuestionsRoute: typeof StudentDrugQuestionsRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentPrescriptionsRoute: typeof StudentPrescriptionsRoute
   StudentProfileRoute: typeof StudentProfileRoute
+  StudentSavedRoute: typeof StudentSavedRoute
   StudentTrainingRoute: typeof StudentTrainingRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCoursesCourseIdRoute: typeof StudentCoursesCourseIdRoute
@@ -439,8 +519,12 @@ interface StudentRouteChildren {
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCasesRoute: StudentCasesRoute,
+  StudentDrugImagesRoute: StudentDrugImagesRoute,
+  StudentDrugQuestionsRoute: StudentDrugQuestionsRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentPrescriptionsRoute: StudentPrescriptionsRoute,
   StudentProfileRoute: StudentProfileRoute,
+  StudentSavedRoute: StudentSavedRoute,
   StudentTrainingRoute: StudentTrainingRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCoursesCourseIdRoute: StudentCoursesCourseIdRoute,

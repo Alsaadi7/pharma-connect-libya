@@ -1,28 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Award,
   Bell,
+  Bookmark,
   ChevronLeft,
   FileText,
   Globe,
+  GraduationCap,
   LogOut,
   Moon,
   Pencil,
   Shield,
   Stethoscope,
-  Clock,
+  Timer,
 } from "lucide-react";
-import { ActionButton, AppBar, Avatar, Bar, Chip, Rating, Screen, SectionTitle } from "@/components/kit";
+import { ActionButton, AppBar, Avatar, Bar, Chip, Screen, SectionTitle } from "@/components/kit";
 import { student } from "@/lib/mock";
-import { Link } from "@tanstack/react-router";
+import { modules, totalLessons } from "@/lib/curriculum";
+import { clinicalCases } from "@/lib/cases";
+import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/student/profile")({
   head: () => ({
     meta: [
       { title: "ملفي الشخصي — PharmaTrain Libya" },
-      { name: "description", content: "بياناتك الأكاديمية، ساعاتك، مهاراتك، شهاداتك، وإعدادات الحساب." },
-      { property: "og:title", content: "ملف الطالب — فارما ترين" },
-      { property: "og:description", content: "سجل تدريبك وتقييمك في صفحة واحدة." },
+      {
+        name: "description",
+        content: "بياناتك الأكاديمية، تقدمك التعليمي، دقائق التعلم، محفوظاتك، وإعدادات الحساب.",
+      },
+      { property: "og:title", content: "ملف الطالب — فارما ترين ليبيا" },
+      { property: "og:description", content: "تقدمك التعليمي ومحفوظاتك في صفحة واحدة." },
+      { property: "og:type", content: "profile" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Profile,
@@ -37,6 +45,14 @@ const settings = [
 ];
 
 function Profile() {
+  const { state } = useStore();
+  const done = state.completedLessons.length;
+  const progress = totalLessons ? Math.round((done / totalLessons) * 100) : 0;
+  const minutes = modules
+    .flatMap((m) => m.lessons)
+    .filter((l) => state.completedLessons.includes(l.id))
+    .reduce((s, l) => s + l.minutes, 0);
+
   return (
     <div>
       <AppBar title="حسابي" />
@@ -61,9 +77,9 @@ function Profile() {
       <Screen className="-mt-4 space-y-5 rounded-t-3xl bg-background pt-5">
         <div className="grid grid-cols-3 gap-2.5">
           {[
-            { icon: Clock, l: "ساعة تدريب", v: String(student.hoursDone) },
-            { icon: Award, l: "شهادات", v: "2" },
-            { icon: Stethoscope, l: "حالات", v: "5" },
+            { icon: GraduationCap, l: "درسًا مكتملًا", v: String(done) },
+            { icon: Timer, l: "دقيقة تعلم", v: String(minutes) },
+            { icon: Stethoscope, l: "حالة محلولة", v: String(state.solvedCases.length) },
           ].map(({ icon: Icon, l, v }) => (
             <div key={l} className="surface-card p-3 text-center">
               <Icon className="mx-auto size-4 text-primary" />
@@ -75,13 +91,16 @@ function Profile() {
 
         <div className="surface-card space-y-3 p-4">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-bold">تقييم المشرف العام</p>
-            <Rating value={student.rating} count="12 تقييم" />
+            <p className="text-xs font-bold">التقدم في المنهج</p>
+            <span className="latin text-xs font-extrabold text-primary">{progress}%</span>
           </div>
-          <Bar value={student.progress} />
+          <Bar value={progress} />
           <p className="text-[11px] text-muted-foreground">
-            تقدم التدريب <span className="latin font-bold text-primary">{student.progress}%</span> — أداء ممتاز في الالتزام
-            والحضور.
+            <span className="latin font-bold text-primary">{done}</span> من{" "}
+            <span className="latin">{totalLessons}</span> درسًا في{" "}
+            <span className="latin">{modules.length}</span> وحدة تعليمية، و{" "}
+            <span className="latin">{state.solvedCases.length}</span> من{" "}
+            <span className="latin">{clinicalCases.length}</span> حالة سريرية.
           </p>
         </div>
 
@@ -89,9 +108,10 @@ function Profile() {
           <SectionTitle title="سجلاتي" />
           <div className="surface-card divide-y divide-border overflow-hidden">
             {[
-              { icon: Award, label: "الشهادات الرقمية", to: "/student/certificates" },
+              { icon: Bookmark, label: "المحفوظات", to: "/student/saved" },
               { icon: Stethoscope, label: "الحالات السريرية", to: "/student/cases" },
-              { icon: FileText, label: "التقارير اليومية", to: "/student/training" },
+              { icon: FileText, label: "محاكي قراءة الوصفات", to: "/student/prescriptions" },
+              { icon: GraduationCap, label: "تقدم التدريب", to: "/student/training" },
             ].map(({ icon: Icon, label, to }) => (
               <Link key={label} to={to as never} className="flex items-center gap-3 px-4 py-3.5">
                 <span className="flex size-9 items-center justify-center rounded-xl bg-primary-soft text-primary">
