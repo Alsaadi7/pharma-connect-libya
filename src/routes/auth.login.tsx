@@ -6,9 +6,9 @@ export const Route = createFileRoute("/auth/login")({
   head: () => ({
     meta: [
       { title: "تسجيل الدخول — PharmaTrain Libya" },
-      { name: "description", content: "سجّل الدخول لمتابعة تدريبك العملي ودوراتك وشهاداتك." },
+      { name: "description", content: "سجّل الدخول لمتابعة دوراتك وحالاتك السريرية وتقدمك التعليمي." },
       { property: "og:title", content: "تسجيل الدخول — فارما ترين ليبيا" },
-      { property: "og:description", content: "دخول الطلاب والصيدليات والمشرفين وشركات الأدوية." },
+      { property: "og:description", content: "دخول الطلاب لمتابعة الدورات والحالات والتدريب." },
     ],
   }),
   component: Login,

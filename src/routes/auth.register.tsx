@@ -17,7 +17,7 @@ export const Route = createFileRoute("/auth/register")({
 function Register() {
   return (
     <div className="mx-auto min-h-screen w-full max-w-[430px]">
-      <AppBar title="إنشاء حساب" back="/auth/account-type" subtitle="الخطوة 2 من 3" />
+      <AppBar title="إنشاء حساب" back="/auth/login" subtitle="الخطوة 2 من 3" />
       <main className="space-y-5 px-5 py-5">
         <div className="surface-card flex items-center gap-3 p-3.5">
           <span className="flex size-10 items-center justify-center rounded-xl bg-primary-soft text-primary">
