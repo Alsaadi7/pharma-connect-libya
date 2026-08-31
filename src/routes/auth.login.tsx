@@ -42,20 +42,9 @@ function Login() {
 
         <div className="space-y-2.5">
           <ActionButton to="/student">دخول كطالب</ActionButton>
-          <div className="grid grid-cols-2 gap-2.5">
-            <ActionButton to="/pharmacy" variant="outline">
-              دخول صيدلية
-            </ActionButton>
-            <ActionButton to="/supervisor" variant="outline">
-              دخول مشرف
-            </ActionButton>
-            <ActionButton to="/company" variant="outline">
-              شركة أدوية
-            </ActionButton>
-            <ActionButton to="/admin" variant="outline">
-              مدير النظام
-            </ActionButton>
-          </div>
+          <ActionButton to="/admin" variant="outline">
+            مدير النظام
+          </ActionButton>
         </div>
 
         <button
@@ -67,10 +56,11 @@ function Login() {
 
         <p className="text-center text-xs text-muted-foreground">
           ليس لديك حساب؟{" "}
-          <Link to="/auth/account-type" className="font-bold text-primary">
+          <Link to="/auth/register" className="font-bold text-primary">
             إنشاء حساب جديد
           </Link>
         </p>
+
       </main>
     </div>
   );
