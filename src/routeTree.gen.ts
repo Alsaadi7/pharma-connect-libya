@@ -22,6 +22,7 @@ import { Route as AuthOtpRouteImport } from './routes/auth.otp'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as StudentCasesRouteImport } from './routes/student.cases'
+import { Route as StudentDrugQuestionsRouteImport } from './routes/student.drug-questions'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
 import { Route as StudentTrainingRouteImport } from './routes/student.training'
@@ -95,6 +96,11 @@ const StudentCasesRoute = StudentCasesRouteImport.update({
   path: '/cases',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentDrugQuestionsRoute = StudentDrugQuestionsRouteImport.update({
+  id: '/drug-questions',
+  path: '/drug-questions',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/auth/otp': typeof AuthOtpRoute
   '/auth/register': typeof AuthRegisterRoute
   '/student/cases': typeof StudentCasesRoute
+  '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/training': typeof StudentTrainingRoute
@@ -213,6 +222,7 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-questions'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
@@ -234,6 +244,7 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-questions'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
@@ -256,6 +267,7 @@ export interface FileRouteTypes {
     | '/auth/otp'
     | '/auth/register'
     | '/student/cases'
+    | '/student/drug-questions'
     | '/student/notifications'
     | '/student/profile'
     | '/student/training'
@@ -373,6 +385,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCasesRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/drug-questions': {
+      id: '/student/drug-questions'
+      path: '/drug-questions'
+      fullPath: '/student/drug-questions'
+      preLoaderRoute: typeof StudentDrugQuestionsRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/notifications': {
       id: '/student/notifications'
       path: '/notifications'
@@ -427,6 +446,7 @@ declare module '@tanstack/react-router' {
 
 interface StudentRouteChildren {
   StudentCasesRoute: typeof StudentCasesRoute
+  StudentDrugQuestionsRoute: typeof StudentDrugQuestionsRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentTrainingRoute: typeof StudentTrainingRoute
@@ -439,6 +459,7 @@ interface StudentRouteChildren {
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCasesRoute: StudentCasesRoute,
+  StudentDrugQuestionsRoute: StudentDrugQuestionsRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentTrainingRoute: StudentTrainingRoute,
