@@ -25,6 +25,7 @@ import { Route as StudentCasesRouteImport } from './routes/student.cases'
 import { Route as StudentDrugImagesRouteImport } from './routes/student.drug-images'
 import { Route as StudentDrugQuestionsRouteImport } from './routes/student.drug-questions'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
+import { Route as StudentPrescriptionsRouteImport } from './routes/student.prescriptions'
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
 import { Route as StudentSavedRouteImport } from './routes/student.saved'
 import { Route as StudentTrainingRouteImport } from './routes/student.training'
@@ -113,6 +114,11 @@ const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentPrescriptionsRoute = StudentPrescriptionsRouteImport.update({
+  id: '/prescriptions',
+  path: '/prescriptions',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentProfileRoute = StudentProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/student/drug-images': typeof StudentDrugImagesRoute
   '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
@@ -190,6 +197,7 @@ export interface FileRoutesByTo {
   '/student/drug-images': typeof StudentDrugImagesRoute
   '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
@@ -216,6 +224,7 @@ export interface FileRoutesById {
   '/student/drug-images': typeof StudentDrugImagesRoute
   '/student/drug-questions': typeof StudentDrugQuestionsRoute
   '/student/notifications': typeof StudentNotificationsRoute
+  '/student/prescriptions': typeof StudentPrescriptionsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/student/drug-images'
     | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
@@ -267,6 +277,7 @@ export interface FileRouteTypes {
     | '/student/drug-images'
     | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
@@ -292,6 +303,7 @@ export interface FileRouteTypes {
     | '/student/drug-images'
     | '/student/drug-questions'
     | '/student/notifications'
+    | '/student/prescriptions'
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
@@ -430,6 +442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentNotificationsRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/prescriptions': {
+      id: '/student/prescriptions'
+      path: '/prescriptions'
+      fullPath: '/student/prescriptions'
+      preLoaderRoute: typeof StudentPrescriptionsRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/profile': {
       id: '/student/profile'
       path: '/profile'
@@ -487,6 +506,7 @@ interface StudentRouteChildren {
   StudentDrugImagesRoute: typeof StudentDrugImagesRoute
   StudentDrugQuestionsRoute: typeof StudentDrugQuestionsRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentPrescriptionsRoute: typeof StudentPrescriptionsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentSavedRoute: typeof StudentSavedRoute
   StudentTrainingRoute: typeof StudentTrainingRoute
@@ -502,6 +522,7 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentDrugImagesRoute: StudentDrugImagesRoute,
   StudentDrugQuestionsRoute: StudentDrugQuestionsRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentPrescriptionsRoute: StudentPrescriptionsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentSavedRoute: StudentSavedRoute,
   StudentTrainingRoute: StudentTrainingRoute,
