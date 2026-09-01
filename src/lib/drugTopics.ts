@@ -41,7 +41,7 @@ export type TopicQuestion = {
   options: string[];
   answer: number;
   explanation: string;
-  drugId?: string;
+  drugId?: string | undefined;
   level: "سهل" | "متوسط" | "متقدم";
   published: boolean;
   order: number;
