@@ -29,6 +29,7 @@ import { Route as StudentPrescriptionsRouteImport } from './routes/student.presc
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
 import { Route as StudentSavedRouteImport } from './routes/student.saved'
 import { Route as StudentTrainingRouteImport } from './routes/student.training'
+import { Route as StudentTrainingCenterRouteImport } from './routes/student.training-center'
 import { Route as StudentCoursesIndexRouteImport } from './routes/student.courses.index'
 import { Route as StudentCoursesCourseIdRouteImport } from './routes/student.courses.$courseId'
 import { Route as StudentPharmaciesIndexRouteImport } from './routes/student.pharmacies.index'
@@ -134,6 +135,11 @@ const StudentTrainingRoute = StudentTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentTrainingCenterRoute = StudentTrainingCenterRouteImport.update({
+  id: '/training-center',
+  path: '/training-center',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentCoursesIndexRoute = StudentCoursesIndexRouteImport.update({
   id: '/courses/',
   path: '/courses/',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
+  '/student/training-center': typeof StudentTrainingCenterRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -201,6 +208,7 @@ export interface FileRoutesByTo {
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
+  '/student/training-center': typeof StudentTrainingCenterRoute
   '/student': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -228,6 +236,7 @@ export interface FileRoutesById {
   '/student/profile': typeof StudentProfileRoute
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
+  '/student/training-center': typeof StudentTrainingCenterRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -256,6 +265,7 @@ export interface FileRouteTypes {
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
+    | '/student/training-center'
     | '/student/'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
+    | '/student/training-center'
     | '/student'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -307,6 +318,7 @@ export interface FileRouteTypes {
     | '/student/profile'
     | '/student/saved'
     | '/student/training'
+    | '/student/training-center'
     | '/student/'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -470,6 +482,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentTrainingRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/training-center': {
+      id: '/student/training-center'
+      path: '/training-center'
+      fullPath: '/student/training-center'
+      preLoaderRoute: typeof StudentTrainingCenterRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/courses/': {
       id: '/student/courses/'
       path: '/courses'
@@ -510,6 +529,7 @@ interface StudentRouteChildren {
   StudentProfileRoute: typeof StudentProfileRoute
   StudentSavedRoute: typeof StudentSavedRoute
   StudentTrainingRoute: typeof StudentTrainingRoute
+  StudentTrainingCenterRoute: typeof StudentTrainingCenterRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCoursesCourseIdRoute: typeof StudentCoursesCourseIdRoute
   StudentPharmaciesPharmacyIdRoute: typeof StudentPharmaciesPharmacyIdRoute
@@ -526,6 +546,7 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentProfileRoute: StudentProfileRoute,
   StudentSavedRoute: StudentSavedRoute,
   StudentTrainingRoute: StudentTrainingRoute,
+  StudentTrainingCenterRoute: StudentTrainingCenterRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCoursesCourseIdRoute: StudentCoursesCourseIdRoute,
   StudentPharmaciesPharmacyIdRoute: StudentPharmaciesPharmacyIdRoute,
