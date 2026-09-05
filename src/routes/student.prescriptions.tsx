@@ -100,7 +100,7 @@ function Prescriptions() {
   );
 }
 
-function Trainer({ rx, onBack, onNext }: { rx: RxTraining; onBack: () => void; onNext?: () => void }) {
+function Trainer({ rx, onBack, onNext }: { rx: RxTraining; onBack: () => void; onNext?: (() => void) | undefined }) {
   const { saveQuiz } = useStore();
   const [answers, setAnswers] = useState<RxAnswers>(emptyAnswers);
   const [checked, setChecked] = useState(false);
