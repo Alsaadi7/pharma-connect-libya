@@ -128,6 +128,26 @@ function DrugSheet({ drug, onClose }: { drug: Drug; onClose: () => void }) {
           الحمل: {drug.pregnancy}
         </p>
 
+        <div className="mt-3 rounded-2xl bg-secondary-soft/50 p-3">
+          <p className="text-[11px] font-bold">🏷️ الأسماء التجارية</p>
+          {drug.brands.length ? (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {drug.brands.map((b) => (
+                <span
+                  key={b}
+                  className="latin rounded-full border border-secondary/30 bg-card px-2.5 py-1 text-[10px] font-bold text-secondary"
+                >
+                  {b}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-1.5 text-[10px] leading-relaxed text-muted-foreground">
+              لا تتوفر أسماء تجارية لهذا الدواء في قاعدة البيانات حاليًا.
+            </p>
+          )}
+        </div>
+
         <div className="mt-3">
           <Section emoji="💊" title="Uses — الاستخدامات" items={drug.uses} />
           <Section
