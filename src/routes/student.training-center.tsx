@@ -5,7 +5,7 @@ import { DrugSearch } from "@/components/DrugCard";
 import { topics } from "@/lib/drugTopics";
 import { useQuestionBank } from "@/lib/questionStore";
 import { useRxTrainings } from "@/lib/rxTraining";
-import { cases } from "@/lib/cases";
+import { clinicalCases as cases } from "@/lib/cases";
 
 export const Route = createFileRoute("/student/training-center")({
   head: () => ({

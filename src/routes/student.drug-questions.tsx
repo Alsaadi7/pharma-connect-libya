@@ -13,7 +13,7 @@ const topicIds = topics.map((t) => t.id);
 
 export const Route = createFileRoute("/student/drug-questions")({
   validateSearch: (s: Record<string, unknown>): { topic?: TopicId } => {
-    const t = typeof s.topic === "string" && topicIds.includes(s.topic as TopicId) ? (s.topic as TopicId) : undefined;
+    const t = typeof s['topic'] === "string" && topicIds.includes(s['topic'] as TopicId) ? (s['topic'] as TopicId) : undefined;
     return t ? { topic: t } : {};
   },
   head: () => ({
