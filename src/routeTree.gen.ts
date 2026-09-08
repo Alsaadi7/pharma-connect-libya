@@ -16,6 +16,7 @@ import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as StudentRouteImport } from './routes/student'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
@@ -70,6 +71,11 @@ const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AuthForgotRoute = AuthForgotRouteImport.update({
   id: '/auth/forgot',
@@ -170,7 +176,7 @@ const StudentPharmaciesPharmacyIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
@@ -190,6 +196,7 @@ export interface FileRoutesByFullPath {
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/training-center': typeof StudentTrainingCenterRoute
+  '/admin/': typeof AdminIndexRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -198,7 +205,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
@@ -217,6 +223,7 @@ export interface FileRoutesByTo {
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/training-center': typeof StudentTrainingCenterRoute
+  '/admin': typeof AdminIndexRoute
   '/student': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -226,7 +233,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
@@ -246,6 +253,7 @@ export interface FileRoutesById {
   '/student/saved': typeof StudentSavedRoute
   '/student/training': typeof StudentTrainingRoute
   '/student/training-center': typeof StudentTrainingCenterRoute
+  '/admin/': typeof AdminIndexRoute
   '/student/': typeof StudentIndexRoute
   '/student/courses/$courseId': typeof StudentCoursesCourseIdRoute
   '/student/pharmacies/$pharmacyId': typeof StudentPharmaciesPharmacyIdRoute
@@ -276,6 +284,7 @@ export interface FileRouteTypes {
     | '/student/saved'
     | '/student/training'
     | '/student/training-center'
+    | '/admin/'
     | '/student/'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -284,7 +293,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/admin-login'
     | '/design-system'
     | '/language'
@@ -303,6 +311,7 @@ export interface FileRouteTypes {
     | '/student/saved'
     | '/student/training'
     | '/student/training-center'
+    | '/admin'
     | '/student'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/student/saved'
     | '/student/training'
     | '/student/training-center'
+    | '/admin/'
     | '/student/'
     | '/student/courses/$courseId'
     | '/student/pharmacies/$pharmacyId'
@@ -340,7 +350,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   DesignSystemRoute: typeof DesignSystemRoute
   LanguageRoute: typeof LanguageRoute
@@ -403,6 +413,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/student'
       preLoaderRoute: typeof StudentRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/auth/forgot': {
       id: '/auth/forgot'
@@ -540,6 +557,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface StudentRouteChildren {
   StudentCasesRoute: typeof StudentCasesRoute
   StudentDrugImagesRoute: typeof StudentDrugImagesRoute
@@ -579,7 +606,7 @@ const StudentRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   DesignSystemRoute: DesignSystemRoute,
   LanguageRoute: LanguageRoute,
