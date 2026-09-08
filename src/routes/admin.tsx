@@ -1,160 +1,140 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { BookOpen, FileText, HelpCircle, Pill, Stethoscope, Users } from "lucide-react";
-import { AppBar, Bar, Chip, Screen, SectionTitle, StatCard, Tabs } from "@/components/kit";
-import { AdminQuestionManager, AdminRxManager } from "@/components/AdminRxManager";
-import { drugs } from "@/lib/drugs";
-import { clinicalCases } from "@/lib/cases";
-import { modules, totalLessons } from "@/lib/curriculum";
-import { topics } from "@/lib/drugTopics";
-import { useQuestionBank } from "@/lib/questionStore";
-import { useRxTrainings } from "@/lib/rxTraining";
+import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import {
+  Activity,
+  BookOpen,
+  Bell,
+  FileText,
+  HelpCircle,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  Pill,
+  Settings,
+  Stethoscope,
+  Users,
+  ClipboardList,
+  Newspaper,
+} from "lucide-react";
+import { useAdminSession } from "@/lib/adminAuth";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "لوحة الإدارة — PharmaTrain Libya" },
+      { title: "لوحة الإدارة — Pharma Connect Libya" },
       {
         name: "description",
-        content: "إدارة محتوى التدريب: روشتات المحاكي، أسئلة الأدوية، الدورات، الحالات السريرية وقاعدة الأدوية.",
+        content: "لوحة تحكم كاملة لإدارة الطلاب والدورات والتدريبات والأسئلة والحالات وقاعدة الأدوية والإشعارات.",
       },
-      { property: "og:title", content: "لوحة الإدارة — فارما ترين ليبيا" },
-      { property: "og:description", content: "إضافة وتعديل ونشر محتوى التدريب الصيدلاني من مكان واحد." },
+      { property: "og:title", content: "لوحة الإدارة — Pharma Connect Libya" },
+      { property: "og:description", content: "إدارة المنصة التعليمية من مكان واحد: محتوى، طلاب، تقارير وإعدادات." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: AdminApp,
+  component: AdminLayout,
 });
 
-const tabs = ["نظرة عامة", "الروشتات", "الأسئلة", "المحتوى"];
+export const adminNav = [
+  { to: "/admin", label: "نظرة عامة", icon: LayoutDashboard },
+  { to: "/admin/students", label: "الطلاب", icon: Users },
+  { to: "/admin/courses", label: "الدورات والوحدات", icon: BookOpen },
+  { to: "/admin/questions", label: "بنك الأسئلة", icon: HelpCircle },
+  { to: "/admin/quizzes", label: "الاختبارات", icon: ClipboardList },
+  { to: "/admin/medications", label: "قاعدة الأدوية", icon: Pill },
+  { to: "/admin/cases", label: "الحالات السريرية", icon: Stethoscope },
+  { to: "/admin/prescriptions", label: "الروشتات التدريبية", icon: FileText },
+  { to: "/admin/notifications", label: "الإشعارات", icon: Bell },
+  { to: "/admin/content", label: "المحتوى", icon: Newspaper },
+  { to: "/admin/activity", label: "سجل العمليات", icon: Activity },
+  { to: "/admin/settings", label: "الإعدادات", icon: Settings },
+] as const;
 
-function AdminApp() {
-  const [tab, setTab] = useState("نظرة عامة");
+function AdminLayout() {
+  const { session, ready, logout } = useAdminSession();
+  const navigate = useNavigate();
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  const [open, setOpen] = useState(false);
 
-  return (
-    <div className="mx-auto min-h-screen w-full max-w-[430px]">
-      <AppBar title="لوحة الإدارة" subtitle="PharmaTrain Libya · إدارة المحتوى" back="/" />
-      <Screen className="space-y-5">
-        <Tabs items={tabs} active={tab} onChange={setTab} />
-        {tab === "نظرة عامة" ? <Overview /> : null}
-        {tab === "الروشتات" ? <AdminRxManager /> : null}
-        {tab === "الأسئلة" ? <AdminQuestionManager /> : null}
-        {tab === "المحتوى" ? <ContentTab /> : null}
-      </Screen>
-    </div>
-  );
-}
+  useEffect(() => {
+    if (ready && !session) navigate({ to: "/admin-login", replace: true });
+  }, [ready, session, navigate]);
 
-function Overview() {
-  const { all: rx } = useRxTrainings();
-  const { all: questions, custom } = useQuestionBank();
+  useEffect(() => {
+    setOpen(false);
+  }, [path]);
 
-  const published = rx.filter((x) => x.published).length;
-  const publishedQ = questions.filter((q) => q.published).length;
-  const coverage = topics.map((t) => ({
-    l: `${t.emoji} ${t.ar}`,
-    v: Math.min(100, Math.round((questions.filter((q) => q.topic === t.id).length / 12) * 100)),
-  }));
-
-  return (
-    <>
-      <div className="grid grid-cols-2 gap-3">
-        <StatCard icon={FileText} label="روشتات تدريبية" value={String(rx.length)} />
-        <StatCard icon={HelpCircle} label="أسئلة الأدوية" value={String(questions.length)} tone="secondary" />
-        <StatCard icon={Pill} label="أدوية في القاعدة" value={String(drugs.length)} tone="primary" />
-        <StatCard icon={Stethoscope} label="حالات سريرية" value={String(clinicalCases.length)} tone="warning" />
+  if (!ready) return <div className="p-10 text-center text-xs text-muted-foreground">جارٍ التحميل...</div>;
+  if (!session)
+    return (
+      <div className="p-10 text-center text-xs text-muted-foreground">
+        هذه المنطقة للإدارة فقط.{" "}
+        <Link to="/admin-login" className="font-bold text-primary">
+          تسجيل الدخول
+        </Link>
       </div>
+    );
 
-      <section>
-        <SectionTitle title="حالة النشر" />
-        <div className="surface-card space-y-3 p-4">
-          <Row label="روشتات منشورة للطلاب" value={`${published} / ${rx.length}`} />
-          <Row label="أسئلة منشورة" value={`${publishedQ} / ${questions.length}`} />
-          <Row label="أسئلة مضافة يدويًا" value={String(custom.length)} />
-          <Row label="وحدات المنهج / الدروس" value={`${modules.length} / ${totalLessons}`} />
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle title="تغطية الأسئلة حسب التصنيف" />
-        <div className="surface-card space-y-3 p-4">
-          {coverage.map((s) => (
-            <div key={s.l} className="space-y-1.5">
-              <div className="flex items-center justify-between text-[11px] font-semibold">
-                <span>{s.l}</span>
-                <span className="latin text-muted-foreground">{s.v}%</span>
-              </div>
-              <Bar value={s.v} tone={s.v > 75 ? "secondary" : "primary"} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle title="ملاحظة" />
-        <div className="surface-card p-4 text-[11px] leading-relaxed text-muted-foreground">
-          <Users className="mb-2 size-4 text-primary" />
-          كل ما تضيفه هنا يُحفظ على جهاز الإدارة ويظهر مباشرة للطالب في مركز التدريب. إدارة حسابات الطلاب تحتاج قاعدة
-          بيانات، وتُضاف في مرحلة لاحقة.
-        </div>
-      </section>
-    </>
-  );
-}
-
-function ContentTab() {
   return (
-    <div className="space-y-4">
-      <section>
-        <SectionTitle title={`وحدات المنهج (${modules.length})`} />
-        <div className="surface-card divide-y divide-border overflow-hidden">
-          {modules.map((m) => (
-            <div key={m.id} className="flex items-center gap-3 p-3.5">
-              <BookOpen className="size-4 shrink-0 text-primary" />
-              <p className="min-w-0 flex-1 truncate text-[11px] font-bold">{m.title}</p>
-              <Chip>{m.lessons.length} دروس</Chip>
-            </div>
-          ))}
+    <div className="min-h-screen bg-background lg:flex">
+      <aside
+        className={cn(
+          "fixed inset-y-0 z-40 w-64 overflow-y-auto border-border bg-card p-4 transition-transform end-0 border-s lg:static lg:translate-x-0",
+          open ? "translate-x-0" : "translate-x-full lg:translate-x-0",
+        )}
+      >
+        <div className="mb-5 px-2">
+          <p className="text-sm font-extrabold">لوحة الإدارة</p>
+          <p className="text-[10px] text-muted-foreground">Pharma Connect Libya</p>
         </div>
-      </section>
+        <nav className="space-y-1">
+          {adminNav.map((n) => {
+            const active = n.to === "/admin" ? path === "/admin" : path.startsWith(n.to);
+            return (
+              <Link
+                key={n.to}
+                to={n.to}
+                className={cn(
+                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[11px] font-bold transition-colors",
+                  active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted",
+                )}
+              >
+                <n.icon className="size-4 shrink-0" />
+                {n.label}
+              </Link>
+            );
+          })}
+        </nav>
+        <button
+          type="button"
+          onClick={() => {
+            logout();
+            navigate({ to: "/admin-login", replace: true });
+          }}
+          className="mt-5 flex w-full items-center gap-3 rounded-xl bg-muted px-3 py-2.5 text-[11px] font-bold text-destructive"
+        >
+          <LogOut className="size-4" /> تسجيل الخروج
+        </button>
+      </aside>
 
-      <section>
-        <SectionTitle title={`الحالات السريرية (${clinicalCases.length})`} />
-        <div className="surface-card divide-y divide-border overflow-hidden">
-          {clinicalCases.map((c) => (
-            <div key={c.id} className="flex items-center gap-3 p-3.5">
-              <Stethoscope className="size-4 shrink-0 text-secondary" />
-              <p className="min-w-0 flex-1 truncate text-[11px] font-bold">{c.title}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle title={`قاعدة الأدوية (${drugs.length})`} />
-        <div className="surface-card divide-y divide-border overflow-hidden">
-          {drugs.map((d) => (
-            <div key={d.id} className="flex items-center gap-3 p-3.5">
-              <Pill className="size-4 shrink-0 text-warning" />
-              <div className="min-w-0 flex-1">
-                <p className="latin truncate text-[11px] font-bold">{d.name}</p>
-                <p className="truncate text-[10px] text-muted-foreground">{d.brands?.join(" · ") || "لا أسماء تجارية"}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <p className="px-1 text-[10px] text-muted-foreground">هذه المحتويات مدمجة في التطبيق للعرض والمراجعة.</p>
-    </div>
-  );
-}
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between text-[11px] font-semibold">
-      <span>{label}</span>
-      <span className="latin font-extrabold">{value}</span>
+      <div className="min-w-0 flex-1">
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-card/90 px-4 py-3 backdrop-blur">
+          <button type="button" onClick={() => setOpen((v) => !v)} className="rounded-xl bg-muted p-2 lg:hidden">
+            <Menu className="size-4" />
+          </button>
+          <div className="min-w-0">
+            <p className="truncate text-xs font-extrabold">{session.name}</p>
+            <p className="latin truncate text-[10px] text-muted-foreground">{session.email}</p>
+          </div>
+          <Link to="/" className="rounded-xl bg-muted px-3 py-2 text-[10px] font-bold">
+            التطبيق
+          </Link>
+        </header>
+        <main className="space-y-5 p-4 pb-16">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
