@@ -17,6 +17,7 @@ import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as StudentRouteImport } from './routes/student'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminStudentsRouteImport } from './routes/admin.students'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthNewPasswordRouteImport } from './routes/auth.new-password'
@@ -75,6 +76,11 @@ const StudentRoute = StudentRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
   getParentRoute: () => AdminRoute,
 } as any)
 const AuthForgotRoute = AuthForgotRouteImport.update({
@@ -182,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/student': typeof StudentRouteWithChildren
+  '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
@@ -209,6 +216,7 @@ export interface FileRoutesByTo {
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/student': typeof StudentRouteWithChildren
+  '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/new-password': typeof AuthNewPasswordRoute
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/language'
     | '/onboarding'
     | '/student'
+    | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
@@ -297,6 +307,7 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/language'
     | '/onboarding'
+    | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
@@ -326,6 +337,7 @@ export interface FileRouteTypes {
     | '/language'
     | '/onboarding'
     | '/student'
+    | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/new-password'
@@ -419,6 +431,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/auth/forgot': {
@@ -558,10 +577,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminStudentsRoute: typeof AdminStudentsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminStudentsRoute: AdminStudentsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
