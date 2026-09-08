@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
@@ -43,6 +44,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
@@ -165,6 +171,7 @@ const StudentPharmaciesPharmacyIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-login': typeof AdminLoginRoute
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/admin-login'
     | '/design-system'
     | '/language'
     | '/onboarding'
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/admin-login'
     | '/design-system'
     | '/language'
     | '/onboarding'
@@ -301,6 +312,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/admin-login'
     | '/design-system'
     | '/language'
     | '/onboarding'
@@ -329,6 +341,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   DesignSystemRoute: typeof DesignSystemRoute
   LanguageRoute: typeof LanguageRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -354,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design-system': {
@@ -560,6 +580,7 @@ const StudentRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AdminLoginRoute: AdminLoginRoute,
   DesignSystemRoute: DesignSystemRoute,
   LanguageRoute: LanguageRoute,
   OnboardingRoute: OnboardingRoute,
