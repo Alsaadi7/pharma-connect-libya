@@ -17,6 +17,16 @@ import { Route as LanguageRouteImport } from './routes/language'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as StudentRouteImport } from './routes/student'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminActivityRouteImport } from './routes/admin.activity'
+import { Route as AdminCasesRouteImport } from './routes/admin.cases'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
+import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
+import { Route as AdminMedicationsRouteImport } from './routes/admin.medications'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminPrescriptionsRouteImport } from './routes/admin.prescriptions'
+import { Route as AdminQuestionsRouteImport } from './routes/admin.questions'
+import { Route as AdminQuizzesRouteImport } from './routes/admin.quizzes'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminStudentsRouteImport } from './routes/admin.students'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
@@ -76,6 +86,56 @@ const StudentRoute = StudentRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminActivityRoute = AdminActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCasesRoute = AdminCasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCoursesRoute = AdminCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMedicationsRoute = AdminMedicationsRouteImport.update({
+  id: '/medications',
+  path: '/medications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPrescriptionsRoute = AdminPrescriptionsRouteImport.update({
+  id: '/prescriptions',
+  path: '/prescriptions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQuestionsRoute = AdminQuestionsRouteImport.update({
+  id: '/questions',
+  path: '/questions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQuizzesRoute = AdminQuizzesRouteImport.update({
+  id: '/quizzes',
+  path: '/quizzes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminStudentsRoute = AdminStudentsRouteImport.update({
@@ -188,6 +248,16 @@ export interface FileRoutesByFullPath {
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/student': typeof StudentRouteWithChildren
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/cases': typeof AdminCasesRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/medications': typeof AdminMedicationsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/quizzes': typeof AdminQuizzesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -216,6 +286,16 @@ export interface FileRoutesByTo {
   '/design-system': typeof DesignSystemRoute
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/cases': typeof AdminCasesRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/medications': typeof AdminMedicationsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/quizzes': typeof AdminQuizzesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -247,6 +327,16 @@ export interface FileRoutesById {
   '/language': typeof LanguageRoute
   '/onboarding': typeof OnboardingRoute
   '/student': typeof StudentRouteWithChildren
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/cases': typeof AdminCasesRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/medications': typeof AdminMedicationsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/questions': typeof AdminQuestionsRoute
+  '/admin/quizzes': typeof AdminQuizzesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/students': typeof AdminStudentsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -279,6 +369,16 @@ export interface FileRouteTypes {
     | '/language'
     | '/onboarding'
     | '/student'
+    | '/admin/activity'
+    | '/admin/cases'
+    | '/admin/content'
+    | '/admin/courses'
+    | '/admin/medications'
+    | '/admin/notifications'
+    | '/admin/prescriptions'
+    | '/admin/questions'
+    | '/admin/quizzes'
+    | '/admin/settings'
     | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
@@ -307,6 +407,16 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/language'
     | '/onboarding'
+    | '/admin/activity'
+    | '/admin/cases'
+    | '/admin/content'
+    | '/admin/courses'
+    | '/admin/medications'
+    | '/admin/notifications'
+    | '/admin/prescriptions'
+    | '/admin/questions'
+    | '/admin/quizzes'
+    | '/admin/settings'
     | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
@@ -337,6 +447,16 @@ export interface FileRouteTypes {
     | '/language'
     | '/onboarding'
     | '/student'
+    | '/admin/activity'
+    | '/admin/cases'
+    | '/admin/content'
+    | '/admin/courses'
+    | '/admin/medications'
+    | '/admin/notifications'
+    | '/admin/prescriptions'
+    | '/admin/questions'
+    | '/admin/quizzes'
+    | '/admin/settings'
     | '/admin/students'
     | '/auth/forgot'
     | '/auth/login'
@@ -431,6 +551,76 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/activity': {
+      id: '/admin/activity'
+      path: '/activity'
+      fullPath: '/admin/activity'
+      preLoaderRoute: typeof AdminActivityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/cases': {
+      id: '/admin/cases'
+      path: '/cases'
+      fullPath: '/admin/cases'
+      preLoaderRoute: typeof AdminCasesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/courses': {
+      id: '/admin/courses'
+      path: '/courses'
+      fullPath: '/admin/courses'
+      preLoaderRoute: typeof AdminCoursesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/medications': {
+      id: '/admin/medications'
+      path: '/medications'
+      fullPath: '/admin/medications'
+      preLoaderRoute: typeof AdminMedicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/prescriptions': {
+      id: '/admin/prescriptions'
+      path: '/prescriptions'
+      fullPath: '/admin/prescriptions'
+      preLoaderRoute: typeof AdminPrescriptionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/questions': {
+      id: '/admin/questions'
+      path: '/questions'
+      fullPath: '/admin/questions'
+      preLoaderRoute: typeof AdminQuestionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/quizzes': {
+      id: '/admin/quizzes'
+      path: '/quizzes'
+      fullPath: '/admin/quizzes'
+      preLoaderRoute: typeof AdminQuizzesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/students': {
@@ -577,11 +767,31 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminActivityRoute: typeof AdminActivityRoute
+  AdminCasesRoute: typeof AdminCasesRoute
+  AdminContentRoute: typeof AdminContentRoute
+  AdminCoursesRoute: typeof AdminCoursesRoute
+  AdminMedicationsRoute: typeof AdminMedicationsRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminPrescriptionsRoute: typeof AdminPrescriptionsRoute
+  AdminQuestionsRoute: typeof AdminQuestionsRoute
+  AdminQuizzesRoute: typeof AdminQuizzesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStudentsRoute: typeof AdminStudentsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminActivityRoute: AdminActivityRoute,
+  AdminCasesRoute: AdminCasesRoute,
+  AdminContentRoute: AdminContentRoute,
+  AdminCoursesRoute: AdminCoursesRoute,
+  AdminMedicationsRoute: AdminMedicationsRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminPrescriptionsRoute: AdminPrescriptionsRoute,
+  AdminQuestionsRoute: AdminQuestionsRoute,
+  AdminQuizzesRoute: AdminQuizzesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminStudentsRoute: AdminStudentsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
