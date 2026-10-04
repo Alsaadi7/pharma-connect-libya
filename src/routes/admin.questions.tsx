@@ -31,7 +31,7 @@ function QuestionsPage() {
       logActivity("حذف متعدد", `أسئلة (${ids.length})`);
     },
   };
-  const topicOpts = topics.map((t) => ({ value: t.id, label: t.name }));
+  const topicOpts = topics.map((t) => ({ value: t.id, label: t.ar }));
 
   return (
     <CrudPage<TopicQuestion>
@@ -55,7 +55,7 @@ function QuestionsPage() {
       ]}
       columns={[
         { key: "text", label: "السؤال", render: (r) => <span className="line-clamp-2">{r.text}</span>, sort: (r) => r.text },
-        { key: "topic", label: "التصنيف", render: (r) => topics.find((t) => t.id === r.topic)?.name ?? r.topic },
+        { key: "topic", label: "التصنيف", render: (r) => topics.find((t) => t.id === r.topic)?.ar ?? r.topic },
         { key: "level", label: "الصعوبة", render: (r) => r.level },
         { key: "pub", label: "الحالة", render: (r) => <Pill tone={r.published ? "ok" : "muted"}>{r.published ? "منشور" : "مخفي"}</Pill> },
       ]}
