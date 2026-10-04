@@ -67,7 +67,7 @@ export function SectionTitle({ title, href }: { title: string; href?: string }) 
 }
 
 export function Screen({ children, className }: { children: ReactNode; className?: string }) {
-  return <main className={cn("space-y-6 px-4 py-5", className)}>{children}</main>;
+  return <main className={cn("space-y-6 px-4 py-5 md:px-6 md:py-6", className)}>{children}</main>;
 }
 
 /* ---------------- primitives ---------------- */

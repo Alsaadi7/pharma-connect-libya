@@ -81,7 +81,7 @@ function DrugSheet({ drug, onClose }: { drug: Drug; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       <button aria-label="إغلاق" onClick={onClose} className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" />
-      <div className="relative max-h-[88vh] w-full max-w-[430px] overflow-y-auto rounded-t-[28px] bg-card p-5 shadow-xl sm:rounded-[28px]">
+      <div className="relative max-h-[88vh] w-full max-w-[430px] overflow-y-auto rounded-t-[28px] sm:max-w-xl md:max-w-2xl bg-card p-5 shadow-xl sm:rounded-[28px]">
         <div className="flex items-start gap-3">
           <div className="min-w-0 flex-1">
             <p className="latin truncate text-base font-extrabold">{drug.name}</p>
