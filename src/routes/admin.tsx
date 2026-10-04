@@ -77,11 +77,14 @@ function AdminLayout() {
     );
 
   return (
-    <div className="min-h-screen bg-background lg:flex">
+    <div className="min-h-screen overflow-x-hidden bg-background lg:flex">
+      {open ? (
+        <button type="button" aria-label="إغلاق القائمة" onClick={() => setOpen(false)} className="fixed inset-0 z-30 bg-foreground/40 lg:hidden" />
+      ) : null}
       <aside
         className={cn(
-          "fixed inset-y-0 z-40 w-64 overflow-y-auto border-border bg-card p-4 transition-transform end-0 border-s lg:static lg:translate-x-0",
-          open ? "translate-x-0" : "translate-x-full lg:translate-x-0",
+          "fixed inset-y-0 z-40 w-64 overflow-y-auto border-border bg-card p-4 transition-transform end-0 border-s lg:sticky lg:top-0 lg:h-screen lg:shrink-0 lg:translate-x-0",
+          open ? "translate-x-0" : "translate-x-full rtl:-translate-x-full lg:translate-x-0 lg:rtl:translate-x-0",
         )}
       >
         <div className="mb-5 px-2">
@@ -119,7 +122,7 @@ function AdminLayout() {
       </aside>
 
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-card/90 px-4 py-3 backdrop-blur">
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-card/90 px-4 py-3 backdrop-blur md:px-6 lg:px-8">
           <button type="button" onClick={() => setOpen((v) => !v)} className="rounded-xl bg-muted p-2 lg:hidden">
             <Menu className="size-4" />
           </button>
@@ -131,7 +134,7 @@ function AdminLayout() {
             التطبيق
           </Link>
         </header>
-        <main className="space-y-5 p-4 pb-16">
+        <main className="mx-auto w-full max-w-7xl space-y-5 p-4 pb-16 md:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>
