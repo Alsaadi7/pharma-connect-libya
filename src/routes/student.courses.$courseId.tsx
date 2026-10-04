@@ -30,7 +30,7 @@ export const Route = createFileRoute("/student/courses/$courseId")({
   component: CourseDetails,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-6 text-xs font-bold">
-      {error.message}
+      {error instanceof Error ? error.message : String(error)}
     </div>
   ),
   notFoundComponent: () => (
